@@ -12,9 +12,22 @@ public class Test {
         String decryptedExample = Files.readString(Path.of("data\\test\\DecryptedExample.txt")).replaceAll("\r", "");
         String encryptedExample = Files.readString(Path.of("data\\test\\EncryptedExample.txt")).replaceAll("\r", "");
         String encryptedMessage = Files.readString(Path.of("data\\test\\EncryptedMessage.txt")).replaceAll("\r", "");
+        String decryptedMessage = decrypt(encryptedMessage);
+        Files.writeString(Path.of("data\\test\\DecryptedMessage.txt"), decryptedMessage);
+
+
+        System.out.println("Data:\n" + encryptedMessage);
+        System.out.println("Output:\n" + decryptedMessage);
+
+        System.out.println();
+
+        findWord(decryptedMessage,3, 4);
+        findWord(decryptedMessage,4, 2);
+
+    }
+
+    public static String decrypt(String encryptedMessage) {
         String decryptedMessage = "";
-
-
         while (encryptedMessage.length() % 8 != 0) { encryptedMessage += " "; }
 
         for (int i = 0; i < encryptedMessage.length(); i+=8) {
@@ -29,10 +42,22 @@ public class Test {
             decryptedMessage += encryptedMessage.substring(i + 4, i + 5);
         }
 
-        System.out.println("Data:\n" + encryptedMessage);
-        System.out.println("Output:\n" + decryptedMessage);
+        return decryptedMessage;
+    }
 
-        Files.writeString(Path.of("data\\test\\DecryptedMessage.txt"), decryptedMessage);
+
+    public static String findWord(String decryptedMessage, int zeile, int wort) {
+        String[] lines = decryptedMessage.split("\n");
+        String line = lines[zeile - 1];
+
+//        System.out.println("Suche in zeile: " + line);
+
+        String[] words = line.split(" ");
+        String word = words[wort - 1];
+
+        System.out.println("Word bei [" + zeile + ", " + wort + "] = \"" + word + "\"");
+
+        return word;
     }
 
 }
