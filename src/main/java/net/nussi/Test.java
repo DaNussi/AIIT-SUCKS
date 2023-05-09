@@ -60,7 +60,7 @@ public class Test {
         String[] words = line.split(" ");
         String word = words[wort - 1];
 
-        System.out.println("Word bei [" + zeile + ", " + wort + "] = \"" + word + "\"");
+        System.out.println("Word bei [Zeile:" + zeile + ", Wort:" + wort + "] = \"" + word + "\"");
 
         return word;
     }
