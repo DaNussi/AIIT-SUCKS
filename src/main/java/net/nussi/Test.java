@@ -3,6 +3,9 @@ package net.nussi;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Test {
 
@@ -24,6 +27,9 @@ public class Test {
         findWord(decryptedMessage,3, 4);
         findWord(decryptedMessage,4, 2);
 
+        System.out.println();
+
+        countWords(decryptedMessage, 'e', 2, 6);
     }
 
     public static String decrypt(String encryptedMessage) {
@@ -45,7 +51,6 @@ public class Test {
         return decryptedMessage;
     }
 
-
     public static String findWord(String decryptedMessage, int zeile, int wort) {
         String[] lines = decryptedMessage.split("\n");
         String line = lines[zeile - 1];
@@ -58,6 +63,33 @@ public class Test {
         System.out.println("Word bei [" + zeile + ", " + wort + "] = \"" + word + "\"");
 
         return word;
+    }
+
+    public static void countWords(String decryptedMessage, char letter, int letterAmount, int specialWordIndex) {
+        String data = decryptedMessage.toLowerCase();
+        String[] words = data.split("[\n ]+");
+
+        // Wörter filtern
+        ArrayList<String> matchedWords = new ArrayList<>();
+        for(String tempWord : words) {
+            String word = tempWord.replaceAll("[ _!,.]+", "");
+
+            // Zählen der buchstaben
+            int countedLetters = 0;
+            for(char c : word.toCharArray()) {
+                if(c == letter) countedLetters++;
+            }
+
+            if(countedLetters == letterAmount) {
+                matchedWords.add(word);
+            }
+        }
+
+        System.out.println("Die Anzahl der Worte welche genau "+ letterAmount + " Buchstaben \"" + letter + "\" beinhalten: " + matchedWords.size());
+        System.out.println("Wörter (NOCH EINMAL ÜBERPRÜFEN WICHTIG): " + Arrays.toString(matchedWords.toArray()));
+
+        // Special Word
+        System.out.println("Wie lautet das " + specialWordIndex +". Wort welches gefunden wurde: " + matchedWords.get(specialWordIndex-1));
     }
 
 }
