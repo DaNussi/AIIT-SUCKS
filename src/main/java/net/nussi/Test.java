@@ -18,8 +18,8 @@ public class Test {
         Files.writeString(Path.of("data\\test\\DecryptedMessage.txt"), decryptedMessage);
 
 
-        System.out.println("Data:\n\"" + encryptedMessage + "\"");
-        System.out.println("Output:\n\"" + decryptedMessage + "\"");
+        System.out.println("Data:\n" + encryptedMessage);
+        System.out.println("Output:\n" + decryptedMessage);
 
         System.out.println();
 
@@ -35,16 +35,18 @@ public class Test {
         String decryptedMessage = "";
         while (encryptedMessage.length() % 8 != 0) { encryptedMessage += " "; }
 
-        for (int i = 0; i < encryptedMessage.length(); i+=8) {
-            decryptedMessage += encryptedMessage.substring(i + 0, i + 1);
-            decryptedMessage += encryptedMessage.substring(i + 1, i + 2);
-            decryptedMessage += encryptedMessage.substring(i + 2, i + 3);
-            decryptedMessage += encryptedMessage.substring(i + 3, i + 4);
+        char[] chars = encryptedMessage.toCharArray();
 
-            decryptedMessage += encryptedMessage.substring(i + 7, i + 8);
-            decryptedMessage += encryptedMessage.substring(i + 6, i + 7);
-            decryptedMessage += encryptedMessage.substring(i + 5, i + 6);
-            decryptedMessage += encryptedMessage.substring(i + 4, i + 5);
+        for (int i = 0; i < encryptedMessage.length(); i+=8) {
+            decryptedMessage += chars[i + 0];
+            decryptedMessage += chars[i + 1];
+            decryptedMessage += chars[i + 2];
+            decryptedMessage += chars[i + 3];
+
+            decryptedMessage += chars[i + 7];
+            decryptedMessage += chars[i + 6];
+            decryptedMessage += chars[i + 5];
+            decryptedMessage += chars[i + 4];
         }
 
         return decryptedMessage;
