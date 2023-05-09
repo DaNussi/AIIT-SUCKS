@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Test {
 
@@ -19,8 +18,8 @@ public class Test {
         Files.writeString(Path.of("data\\test\\DecryptedMessage.txt"), decryptedMessage);
 
 
-        System.out.println("Data:\n" + encryptedMessage);
-        System.out.println("Output:\n" + decryptedMessage);
+        System.out.println("Data:\n\"" + encryptedMessage + "\"");
+        System.out.println("Output:\n\"" + decryptedMessage + "\"");
 
         System.out.println();
 
